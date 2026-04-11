@@ -1,0 +1,108 @@
+<style>
+.bq-wrap { padding: 1rem 0; font-family: var(--font-sans); }
+.bq-section { margin-bottom: 1.2rem; }
+.bq-header { display: flex; align-items: center; gap: 10px; margin-bottom: 0.5rem; }
+.bq-pill { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+.bq-pill.profit   { background: #FAECE7; color: #993C1D; }
+.bq-pill.customer { background: #EEEDFE; color: #534AB7; }
+.bq-pill.ops      { background: #E1F5EE; color: #0F6E56; }
+.bq-pill.discount { background: #FAEEDA; color: #854F0B; }
+.bq-pill.geo      { background: #E6F1FB; color: #185FA5; }
+.bq-label { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+.bq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.bq-card { background: var(--color-background-secondary); border: 1px solid var(--color-border-tertiary); border-radius: 8px; padding: 10px 12px; cursor: pointer; transition: border-color .15s; }
+.bq-card:hover { border-color: var(--color-border-primary); }
+.bq-q { font-size: 12px; color: var(--color-text-primary); line-height: 1.5; margin-bottom: 4px; }
+.bq-meta { font-size: 11px; color: var(--color-text-tertiary); }
+.bq-priority { display: inline-block; font-size: 10px; font-weight: 500; padding: 1px 7px; border-radius: 10px; margin-right: 4px; }
+.pri-high { background:#FCEBEB; color:#A32D2D; }
+.pri-med  { background:#FAEEDA; color:#854F0B; }
+</style>
+<div class="bq-wrap">
+
+  <div class="bq-section">
+    <div class="bq-header">
+      <span class="bq-pill profit">Profitability</span>
+      <span class="bq-label">Where is the business losing money?</span>
+    </div>
+    <div class="bq-grid">
+      <div class="bq-card" onclick="sendPrompt('Start EDA on profitability by category and sub-category')">
+        <div class="bq-q">Which categories and sub-categories have negative profit despite high sales?</div>
+        <div class="bq-meta"><span class="bq-priority pri-high">High</span>Sales, Profit, Category, Sub-Category</div>
+      </div>
+      <div class="bq-card" onclick="sendPrompt('Analyze profit margin distribution and identify the worst-performing products')">
+        <div class="bq-q">What are the top 10 most loss-making products and what do they have in common?</div>
+        <div class="bq-meta"><span class="bq-priority pri-high">High</span>Product Name, Profit, Discount</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bq-section">
+    <div class="bq-header">
+      <span class="bq-pill discount">Discount impact</span>
+      <span class="bq-label">Is discounting actually helping?</span>
+    </div>
+    <div class="bq-grid">
+      <div class="bq-card" onclick="sendPrompt('Analyze the relationship between discount rate and profit margin')">
+        <div class="bq-q">Does a higher discount rate consistently erode profit margin across all categories?</div>
+        <div class="bq-meta"><span class="bq-priority pri-high">High</span>Discount, Profit Margin, Category</div>
+      </div>
+      <div class="bq-card" onclick="sendPrompt('At what discount threshold does profit turn negative on average?')">
+        <div class="bq-q">At what discount threshold does a transaction become loss-making on average?</div>
+        <div class="bq-meta"><span class="bq-priority pri-high">High</span>Discount, Is Loss, Sub-Category</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bq-section">
+    <div class="bq-header">
+      <span class="bq-pill geo">Geography</span>
+      <span class="bq-label">Which markets are underperforming?</span>
+    </div>
+    <div class="bq-grid">
+      <div class="bq-card" onclick="sendPrompt('Analyze sales and profit by region and state')">
+        <div class="bq-q">Which regions and states generate strong sales but weak or negative profit?</div>
+        <div class="bq-meta"><span class="bq-priority pri-high">High</span>Region, State, Sales, Profit</div>
+      </div>
+      <div class="bq-card" onclick="sendPrompt('Which cities have the highest order volume but lowest margins?')">
+        <div class="bq-q">Which cities have the highest order volume but the lowest margins?</div>
+        <div class="bq-meta"><span class="bq-priority pri-med">Medium</span>City, Sales, Profit Margin</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bq-section">
+    <div class="bq-header">
+      <span class="bq-pill customer">Customer behaviour</span>
+      <span class="bq-label">Who are the most and least valuable customers?</span>
+    </div>
+    <div class="bq-grid">
+      <div class="bq-card" onclick="sendPrompt('Analyze sales and profit by customer segment')">
+        <div class="bq-q">Which customer segment (Consumer / Corporate / Home Office) is most profitable?</div>
+        <div class="bq-meta"><span class="bq-priority pri-high">High</span>Segment, Profit, Sales</div>
+      </div>
+      <div class="bq-card" onclick="sendPrompt('Who are the top and bottom 10 customers by profit contribution?')">
+        <div class="bq-q">Who are the top and bottom 10 customers by total profit contribution?</div>
+        <div class="bq-meta"><span class="bq-priority pri-med">Medium</span>Customer Name, Profit, Order count</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bq-section">
+    <div class="bq-header">
+      <span class="bq-pill ops">Time & operations</span>
+      <span class="bq-label">How is performance trending?</span>
+    </div>
+    <div class="bq-grid">
+      <div class="bq-card" onclick="sendPrompt('Analyze monthly and yearly sales and profit trends from 2014 to 2017')">
+        <div class="bq-q">How have sales and profit trended month-by-month from 2014 to 2017?</div>
+        <div class="bq-meta"><span class="bq-priority pri-high">High</span>Order Date, Sales, Profit, Quarter</div>
+      </div>
+      <div class="bq-card" onclick="sendPrompt('Does ship mode affect profitability or customer segment choice?')">
+        <div class="bq-q">Does ship mode correlate with profit margin or segment preference?</div>
+        <div class="bq-meta"><span class="bq-priority pri-med">Medium</span>Ship Mode, Profit Margin, Segment</div>
+      </div>
+    </div>
+  </div>
+
+</div>
