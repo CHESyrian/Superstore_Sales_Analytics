@@ -1,0 +1,124 @@
+
+<style>
+.p4-wrap { padding: 1rem 0; font-family: var(--font-sans); }
+.p4-section { margin-bottom: 1.2rem; }
+.p4-header { display: flex; align-items: center; gap: 10px; margin-bottom: 0.6rem; }
+.p4-pill { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+.p4-pill.rfm     { background: #EEEDFE; color: #534AB7; }
+.p4-pill.cohort  { background: #E1F5EE; color: #0F6E56; }
+.p4-pill.margin  { background: #FAEEDA; color: #854F0B; }
+.p4-pill.model   { background: #FAECE7; color: #993C1D; }
+.p4-label { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+.p4-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.p4-card { background: var(--color-background-secondary); border: 1px solid var(--color-border-tertiary); border-radius: 8px; padding: 10px 14px; cursor: pointer; transition: border-color .15s; }
+.p4-card:hover { border-color: var(--color-border-primary); }
+.p4-card-title { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 3px; }
+.p4-card-desc  { font-size: 11px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 4px; }
+.p4-card-meta  { font-size: 10px; color: var(--color-text-tertiary); }
+.p4-tag { display: inline-block; font-size: 10px; font-weight: 500; padding: 1px 6px; border-radius: 8px; margin-right: 3px; }
+.tag-lib { background: #E6F1FB; color: #185FA5; }
+.tag-out { background: #EAF3DE; color: #3B6D11; }
+</style>
+<div class="p4-wrap">
+
+  <div class="p4-section">
+    <div class="p4-header">
+      <span class="p4-pill rfm">A — RFM segmentation</span>
+      <span class="p4-label">Who are our most valuable customers?</span>
+    </div>
+    <div class="p4-grid">
+      <div class="p4-card" onclick="sendPrompt('Run RFM segmentation on the Superstore customers')">
+        <div class="p4-card-title">RFM score & segment assignment</div>
+        <div class="p4-card-desc">Score every customer on Recency, Frequency and Monetary value. Assign to segments: Champions, Loyal, At Risk, Lost, New.</div>
+        <div class="p4-card-meta">
+          <span class="p4-tag tag-lib">pandas · numpy</span>
+          <span class="p4-tag tag-out">Customer segment labels</span>
+        </div>
+      </div>
+      <div class="p4-card" onclick="sendPrompt('Run RFM segmentation on the Superstore customers')">
+        <div class="p4-card-title">Segment profiling & visualisation</div>
+        <div class="p4-card-desc">Profile each RFM segment by revenue, profit, discount behaviour and region. Scatter plot of R vs F vs M.</div>
+        <div class="p4-card-meta">
+          <span class="p4-tag tag-lib">matplotlib · seaborn</span>
+          <span class="p4-tag tag-out">Segment heatmap + scatter</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p4-section">
+    <div class="p4-header">
+      <span class="p4-pill cohort">B — Cohort analysis</span>
+      <span class="p4-label">Are customers coming back?</span>
+    </div>
+    <div class="p4-grid">
+      <div class="p4-card" onclick="sendPrompt('Run cohort retention analysis on Superstore customers')">
+        <div class="p4-card-title">Quarterly retention heatmap</div>
+        <div class="p4-card-desc">Group customers by first-order quarter. Track what % of each cohort returns in subsequent quarters.</div>
+        <div class="p4-card-meta">
+          <span class="p4-tag tag-lib">pandas · seaborn</span>
+          <span class="p4-tag tag-out">Cohort retention heatmap</span>
+        </div>
+      </div>
+      <div class="p4-card" onclick="sendPrompt('Run cohort analysis on Superstore customers')">
+        <div class="p4-card-title">Cohort revenue & profit over time</div>
+        <div class="p4-card-desc">Track cumulative revenue and profit per cohort across quarters to identify which acquisition periods deliver the most lifetime value.</div>
+        <div class="p4-card-meta">
+          <span class="p4-tag tag-lib">pandas · matplotlib</span>
+          <span class="p4-tag tag-out">Cohort LTV lines</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p4-section">
+    <div class="p4-header">
+      <span class="p4-pill margin">C — Margin erosion deep-dive</span>
+      <span class="p4-label">Quantify exactly how much discount is costing</span>
+    </div>
+    <div class="p4-grid">
+      <div class="p4-card" onclick="sendPrompt('Run margin erosion analysis — quantify profit lost to discounting')">
+        <div class="p4-card-title">Profit lost to discounting</div>
+        <div class="p4-card-desc">Simulate what profit would have been at 0% discount vs actual. Quantify the exact dollar cost of the current discount policy.</div>
+        <div class="p4-card-meta">
+          <span class="p4-tag tag-lib">pandas · numpy</span>
+          <span class="p4-tag tag-out">$ opportunity table</span>
+        </div>
+      </div>
+      <div class="p4-card" onclick="sendPrompt('Run margin erosion analysis — quantify profit lost to discounting')">
+        <div class="p4-card-title">Sub-category & regional breakdown</div>
+        <div class="p4-card-desc">Break down profit loss by sub-category and region. Rank by recovery opportunity if discount cap is applied.</div>
+        <div class="p4-card-meta">
+          <span class="p4-tag tag-lib">pandas · matplotlib</span>
+          <span class="p4-tag tag-out">Ranked opportunity chart</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p4-section">
+    <div class="p4-header">
+      <span class="p4-pill model">D — Predictive modelling</span>
+      <span class="p4-label">What drives profit — and can we predict it?</span>
+    </div>
+    <div class="p4-grid">
+      <div class="p4-card" onclick="sendPrompt('Build a profit prediction model using scikit-learn on Superstore data')">
+        <div class="p4-card-title">Profit margin regression</div>
+        <div class="p4-card-desc">Train a Random Forest regressor to predict profit margin from Discount, Category, Region, Segment, Ship Mode, and Sub-Category.</div>
+        <div class="p4-card-meta">
+          <span class="p4-tag tag-lib">scikit-learn</span>
+          <span class="p4-tag tag-out">R² score + predictions</span>
+        </div>
+      </div>
+      <div class="p4-card" onclick="sendPrompt('Build a profit prediction model using scikit-learn on Superstore data')">
+        <div class="p4-card-title">Feature importance ranking</div>
+        <div class="p4-card-desc">Extract and visualise which features drive profit margin most. Confirms or challenges EDA findings with statistical weight.</div>
+        <div class="p4-card-meta">
+          <span class="p4-tag tag-lib">scikit-learn · matplotlib</span>
+          <span class="p4-tag tag-out">Feature importance chart</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
