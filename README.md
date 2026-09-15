@@ -1,1 +1,1 @@
-## Data Analytics Project using GEn AI (Claude AI)
+# Data Analytics Project using Gen AI (Claude AI)
